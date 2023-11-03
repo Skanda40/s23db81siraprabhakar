@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to Pug Handson
+  button(type="button", class="btn btn-success", onclick="goFaster()") Press me
+  
+  div#faster Increase the speed
+  div
+    p(id="speed") MPH #{mph} with change #{change}.
+  script.
+    var mph = 20;
+    var change = 1;
+
+    function goFaster() {
+      mph += change;
+      change += 1;
+      document.getElementById("speed").textContent = `MPH ${mph} with change ${change}.`;
+    }
