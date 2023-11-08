@@ -1,9 +1,6 @@
 var express = require('express');
+const author_controlers= require('../controllers/author');
 var router = express.Router();
-
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('author', { title: 'Express' });
-});
-
+/* GET costumes */
+router.get('/', author_controlers.costume_view_all_Page );
 module.exports = router;
