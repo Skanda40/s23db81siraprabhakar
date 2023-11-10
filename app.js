@@ -17,20 +17,22 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 db.once("open", function(){
 console.log("Connection to DB succeeded")})
 
-async function recreateDB(){
-  // Delete everything
-  await author.deleteMany();
-  let instance1 = new 
- author({name:"Skan", expertise:"Java", 
- age:25});
-  instance1.save().then(doc=>{
-  console.log("First object saved")}
-  ).catch(err=>{
-  console.error(err)
-  });
- }
- let reseed = true;
- if (reseed) {recreateDB();}
+// async function recreateDB(){
+//   // Delete everything
+//   await author.deleteMany();
+//   let instance1 = new author({name:"Skan", expertise:"Java", age:25});
+//   let instance2 = new author({name:"Eren", expertise:"Iphone", age:23});
+//   let instance3 = new author({name:"Karz", expertise:"Full Stack", age:24});
+//   instance2.save();
+//   instance3.save();
+//   instance1.save().then(doc=>{
+//   console.log(" objects saved")}
+//   ).catch(err=>{
+//   console.error(err)
+//   });
+//  }
+//  let reseed = true;
+//  if (reseed) {recreateDB();}
  
 
 var indexRouter = require('./routes/index');

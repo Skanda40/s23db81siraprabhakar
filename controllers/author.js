@@ -12,9 +12,17 @@ exports.author_list = async function(req, res) {
    };
    
 // for a specific Costume.
-exports.author_detail = function(req, res) {
- res.send('NOT IMPLEMENTED: author detail: ' + req.params.id);
-};
+exports.author_detail =  async function(req, res) {
+    console.log("detail" + req.params.id)
+    try {
+    result = await author.findById( req.params.id)
+    res.send(result)
+    } catch (error) {
+    res.status(500)
+    res.send(`{"error": document for id ${req.params.id} not found`);
+    }
+   };
+   
 // Handle Costume create on POST.
 exports.author_create_post = async function(req, res) {
     console.log(req.body)
@@ -40,9 +48,25 @@ exports.author_delete = function(req, res) {
  res.send('NOT IMPLEMENTED: author delete DELETE ' + req.params.id);
 };
 // Handle Costume update form on PUT.
-exports.author_update_put = function(req, res) {
- res.send('NOT IMPLEMENTED: author update PUT' + req.params.id);
-};
+exports.author_update_put = async function(req, res) {
+    console.log(`update on id ${req.params.id} with body 
+   ${JSON.stringify(req.body)}`)
+    try {
+    let toUpdate = await author.findById( req.params.id)
+    // Do updates of properties
+    if(req.body.name) 
+    toUpdate.name = req.body.name;
+    if(req.body.expertise) toUpdate.expertise = req.body.expertise;
+    if(req.body.age) toUpdate.age = req.body.age;
+    let result = await toUpdate.save();
+    console.log("Sucess " + result)
+    res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": ${err}: Update for id ${req.params.id} 
+   failed`);
+    }
+   };
 
 
 exports.costume_view_all_Page = async function(req, res) {
