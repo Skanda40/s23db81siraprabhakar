@@ -44,9 +44,18 @@ exports.author_create_post = async function(req, res) {
     } 
    }
 // Handle Costume delete form on DELETE.
-exports.author_delete = function(req, res) {
- res.send('NOT IMPLEMENTED: author delete DELETE ' + req.params.id);
-};
+exports.author_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+    result = await author.findByIdAndDelete( req.params.id)
+    console.log("Removed " + result)
+    res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": Error deleting ${err}}`);
+    }
+   };
+   
 // Handle Costume update form on PUT.
 exports.author_update_put = async function(req, res) {
     console.log(`update on id ${req.params.id} with body 
@@ -69,7 +78,7 @@ exports.author_update_put = async function(req, res) {
    };
 
 
-exports.costume_view_all_Page = async function(req, res) {
+exports.author_view_all_Page = async function(req, res) {
     try{
     theCostumes = await author.find();
     res.render('author', { title: 'author Search Results', results: theCostumes });
@@ -78,5 +87,18 @@ exports.costume_view_all_Page = async function(req, res) {
     res.status(500);
     res.send(`{"error": ${err}}`);
     } 
+   };
+
+   exports.author_view_one_Page = async function(req, res) {
+    console.log("single view for id " + req.query.id)
+    try{
+    result = await author.findById( req.query.id)
+    res.render('costumedetail', 
+   { title: 'Author Detail', toShow: result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
    };
    
