@@ -70,6 +70,7 @@ exports.author_delete = async function(req, res) {
    
 // Handle Costume update form on PUT.
 exports.author_update_put = async function(req, res) {
+    console.log("IN")
     console.log(`update on id ${req.params.id} with body 
    ${JSON.stringify(req.body)}`)
     try {
@@ -91,7 +92,7 @@ exports.author_update_put = async function(req, res) {
 
 // Handle building the view for updating a costume.
 // query provides the id
-exports.costume_update_Page = async function(req, res) {
+exports.author_update_Page = async function(req, res) {
     console.log("update view for item "+req.query.id)
     try{
     let result = await author.findById(req.query.id)

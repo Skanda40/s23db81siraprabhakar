@@ -9,9 +9,9 @@ block content
 
   div.row(class='mb-2')
     div.mr-1 ID is
-    div #{costumeid}
+    div #{id}
 
-  - let actionid = "/resource/costumes/" + id
+  - let actionid = "/resource/author/"+id
   form(id='AuthorForm', action= actionid, method="PUT")
     div.form-group
       label.costumeAttr(for='name') Costume type
