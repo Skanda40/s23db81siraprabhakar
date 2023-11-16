@@ -24,7 +24,7 @@ exports.author_detail =  async function(req, res) {
    };
    
 // Handle Costume create on POST.
-exports.author_create_post = async function(req, res) {
+exports.author_create_post = async function (req, res) {
     console.log(req.body)
     let document = new author();
     // We are looking for a body, since POST does not have query parameters.
@@ -32,17 +32,29 @@ exports.author_create_post = async function(req, res) {
     // and require that it be a json object
     // {"costume_type":"goat", "cost":12, "size":"large"}
     document.name = req.body.name;
-    document.expertise = req.body.expertise;
+    document.expertise = req.body.expertisea;
     document.age = req.body.age;
+    try {
+        let result = await document.save();
+        res.send(result);
+    }
+    catch (err) {
+        res.status(500);
+        res.send(`{"error": ${err}}`);
+    };
+};
+
+exports.author_create_Page = function(req, res) {
+    console.log("create view")
     try{
-    let result = await document.save();
-    res.send(result);
+    res.render('authorcreate', { title: 'Author Create'});
     }
     catch(err){
-    res.status(500);
-    res.send(`{"error": ${err}}`);
-    } 
-   }
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+   };
+   
 // Handle Costume delete form on DELETE.
 exports.author_delete = async function(req, res) {
     console.log("delete " + req.params.id)
@@ -74,6 +86,20 @@ exports.author_update_put = async function(req, res) {
     res.status(500)
     res.send(`{"error": ${err}: Update for id ${req.params.id} 
    failed`);
+    }
+   };
+
+// Handle building the view for updating a costume.
+// query provides the id
+exports.costume_update_Page = async function(req, res) {
+    console.log("update view for item "+req.query.id)
+    try{
+    let result = await author.findById(req.query.id)
+    res.render('authorupdate', { title: 'Author Update', toShow: result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
     }
    };
 
