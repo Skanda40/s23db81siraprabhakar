@@ -1,0 +1,17 @@
+extends layout
+block content
+ h1= title
+ - let name = toShow.name
+ - let expertise = toShow.expertise
+ - let age = toShow.age
+ div
+ div.row
+ div(class='authorAttr mr-3') Author name is:
+ div #{name}
+ div.row
+ div(class='authorAttr mr-3') Author expertise is:
+ div #{expertise}
+ div.row
+ div(class='authorAttr mr-3') Author age is:
+ div #{age}
+ div.row

@@ -47,7 +47,7 @@ exports.author_create_post = async function(req, res) {
 exports.author_delete = async function(req, res) {
     console.log("delete " + req.params.id)
     try {
-    result = await author.findByIdAndDelete( req.params.id)
+    result = await author.findByIdAndDelete(req.params.id)
     console.log("Removed " + result)
     res.send(result)
     } catch (err) {
@@ -89,11 +89,14 @@ exports.author_view_all_Page = async function(req, res) {
     } 
    };
 
+
+
+   
    exports.author_view_one_Page = async function(req, res) {
     console.log("single view for id " + req.query.id)
     try{
     result = await author.findById( req.query.id)
-    res.render('costumedetail', 
+    res.render('authordetail', 
    { title: 'Author Detail', toShow: result });
     }
     catch(err){
