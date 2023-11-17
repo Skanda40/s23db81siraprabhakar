@@ -8,14 +8,14 @@ block content
   .container-fluid
     .row
       - let results1
-      each fruit, index in results
+      each author, index in results
         .col-sm-4.mb-3
           .card.clickable-card(onclick=`buy(${index})`, style=`background-color:green; color: white;`)
             .card-body
-              h4.card-title= fruit.name
-              p.card-text expertise: #{fruit.expertise}
-              p.card-text age: #{fruit.age.toFixed(2)}
-              button.btn.btn-danger.btn-sm(delete-btn, onclick=`deleteFruit('${fruit._id}')`) Update
+              h4.card-title= author.name
+              p.card-text expertise: #{author.expertise}
+              p.card-text age: #{author.age.toFixed(2)}
+              button.btn.btn-danger.btn-sm(delete-btn, onclick=`deleteFruit('${author._id}')`) Update
  
   script.
     function deleteFruit(id) {
