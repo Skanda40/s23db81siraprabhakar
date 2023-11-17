@@ -1,17 +1,24 @@
 extends layout
-
+ 
 block content
   h1= title
-
-  - const results1 = [{name: "Paulo Coelho", expertise: "Novels", age: 50}, {name: "JK Rowling", expertise: "Fiction", age: 60}, {name: "Dale Carnegie", expertise: "Self-help", age: 70}]
-
-  div(class="container-fluid")
-    div(class="row")
-      each author, index in results 
-
-        div(class="col-sm-2", onclick=`buy(${index})`) #{author.name}, #{author.expertise}, #{author.age}
-        
+  head
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm', crossorigin='anonymous')
+ 
+  .container-fluid
+    .row
+      - let results1
+      each fruit, index in results
+        .col-sm-4.mb-3
+          .card.clickable-card(onclick=`buy(${index})`, style=`background-color:green; color: white;`)
+            .card-body
+              h4.card-title= fruit.name
+              p.card-text expertise: #{fruit.expertise}
+              p.card-text age: #{fruit.age.toFixed(2)}
+              button.btn.btn-danger.btn-sm(delete-btn, onclick=`deleteFruit('${fruit._id}')`) Update
+ 
   script.
-    function buy(b) {
-      alert(`You purchased Item ${b+1}`)
+    function deleteFruit(id) {
+      window.location.href='/author/update/?id='+id;
     }
+ 
