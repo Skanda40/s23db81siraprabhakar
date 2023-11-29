@@ -61,5 +61,3 @@ router.get('/ping', function (req, res) {
 
 module.exports = router;
 
-/* GET update costume page */
-router.get('/update', author_controlers.author_update_Page);

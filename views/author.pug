@@ -15,10 +15,21 @@ block content
               h4.card-title= author.name
               p.card-text expertise: #{author.expertise}
               p.card-text age: #{author.age.toFixed(2)}
-              button.btn.btn-danger.btn-sm(delete-btn, onclick=`deleteFruit('${author._id}')`) Update
+              button.btn.btn-danger.btn-sm(delete-btn, onclick=`deleteFruit('${author._id}')`) Delete
+              button.btn.btn-danger.btn-sm(delete-btn, onclick=`updateFruit('${author._id}')`) Update
+              button.btn.btn-danger.btn-sm(delete-btn, onclick=`detailFruit('${author._id}')`) Detail 
+
  
   script.
     function deleteFruit(id) {
+      window.location.href='/author/delete/?id='+id;
+    }
+
+    function updateFruit(id) {
       window.location.href='/author/update/?id='+id;
+    }
+
+    function detailFruit(id) {
+      window.location.href='/author/detail/?id='+id;
     }
  
